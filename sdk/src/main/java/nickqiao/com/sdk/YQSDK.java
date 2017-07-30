@@ -39,6 +39,12 @@ public class YQSDK {
         ProxySdk.createIntance().reportGameInfo(activity, gameInfo);
     }
 
+    /**
+     * Application生命周期相关接口
+     * 在application的attachBaseContext方法中调用
+     * 必须在super.attachBaseContext(context)前调用
+     * @param context
+     */
     public static void beforeAppAttach(Context context) {
         ProxySdk.createIntance().beforeAppAttach(context);
     }
@@ -66,14 +72,6 @@ public class YQSDK {
      */
     public static void onPause(Activity activity) {
         ProxySdk.createIntance().onPause(activity);
-    }
-
-    /**
-     * Activity 相关生命周期 changeOrientation
-     * @param activity
-     */
-    public static void changeOrientation(Activity activity, int orientation) {
-        ProxySdk.createIntance().changeOrientation(activity, orientation);
     }
 
     /**
