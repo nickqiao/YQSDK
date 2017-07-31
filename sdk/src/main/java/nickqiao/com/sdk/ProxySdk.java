@@ -1,15 +1,19 @@
 package nickqiao.com.sdk;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import nickqiao.com.sdk.listener.IResultListener;
+import nickqiao.com.sdk.listener.LoginListener;
+import nickqiao.com.sdk.listener.LogoutListener;
+import nickqiao.com.sdk.listener.PayListener;
 import nickqiao.com.sdk.listener.SplashListener;
 import nickqiao.com.sdk.model.SdkGameInfo;
 import nickqiao.com.sdk.model.SdkInitInfo;
 import nickqiao.com.sdk.model.SdkPayOrder;
+import nickqiao.com.sdk.utils.ScreenUtil;
 
 /**
  * Created by chenyuqiao on 2017/7/30 .
@@ -19,10 +23,16 @@ public class ProxySdk {
 
     private static String TAG = ProxySdk.class.getSimpleName();
     private static ProxySdk intance;
-    private Activity mContext;
-    private static SplashListener mSplashListener;
+    private Application mApplicaton;
+    private Activity mActivity;
+
     private SdkInitInfo mSdkInitInfo;
-    private IResultListener mResultListener;
+
+    private SplashListener mSplashListener;
+    private PayListener mPayListener;
+    private LoginListener mLoginListener;
+    private LogoutListener mLogoutListener;
+
     private ProxySdk() {
 
     }
@@ -35,7 +45,11 @@ public class ProxySdk {
     }
 
     public Context getContext() {
-        return mContext;
+        return mApplicaton;
+    }
+
+    public Activity getActivity() {
+        return mActivity;
     }
 
     private void initApplication(Context context) {
@@ -91,30 +105,35 @@ public class ProxySdk {
 
     }
 
-    public void init(final Activity activity, final SdkInitInfo sdkInitInfo, IResultListener resultListener) {
+    public void init(final Activity activity, final SdkInitInfo sdkInitInfo, SplashListener splashListener) {
         Log.d(TAG, "init");
-        mContext = activity;
+        mActivity = activity;
+        mApplicaton = activity.getApplication();
         mSdkInitInfo = sdkInitInfo;
-        mResultListener = resultListener;
+        mSplashListener = splashListener;
+        ScreenUtil.init(activity.getApplication());
     }
 
-    public void login(Activity activity) {
+    public void login(LoginListener loginListener) {
         Log.d(TAG, "login");
+        mLoginListener = loginListener;
     }
 
-    public void pay(Activity activity, SdkPayOrder payOrder) {
+    public void pay(SdkPayOrder payOrder, PayListener payListener) {
         Log.d(TAG, "pay");
+        mPayListener = payListener;
     }
 
     public void exitGame(Activity activity) {
         Log.d(TAG, "exitGame");
     }
 
-    public void logout(Activity activity) {
+    public void logout(LogoutListener logoutListener) {
         Log.d(TAG, "logout");
+        mLogoutListener = logoutListener;
     }
 
-    public void reportGameInfo(Activity activity, SdkGameInfo gameInfo) {
+    public void reportGameInfo(SdkGameInfo gameInfo) {
         Log.d(TAG, "reportGameInfo");
     }
 

@@ -9,11 +9,14 @@ import android.view.View;
 import java.util.UUID;
 
 import nickqiao.com.sdk.YQSDK;
-import nickqiao.com.sdk.listener.IResultListener;
+import nickqiao.com.sdk.listener.LoginListener;
+import nickqiao.com.sdk.listener.LogoutListener;
+import nickqiao.com.sdk.listener.PayListener;
+import nickqiao.com.sdk.listener.SplashListener;
 import nickqiao.com.sdk.model.SdkGameInfo;
 import nickqiao.com.sdk.model.SdkInitInfo;
 import nickqiao.com.sdk.model.SdkPayOrder;
-import nickqiao.com.sdk.model.SdkResult;
+import nickqiao.com.sdk.model.UserBean;
 
 public class MainActivity extends Activity implements View.OnClickListener{
 
@@ -36,14 +39,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
         initInfo.debug = true;
         initInfo.oritentation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
         initInfo.showSplash = false;
-        YQSDK.init(this, initInfo, new IResultListener() {
+        YQSDK.init(this, initInfo, new SplashListener() {
             @Override
-            public void onResult(SdkResult result) {
+            public void onSplashComplete() {
 
             }
         });
-
-
     }
 
     @Override
@@ -86,10 +87,25 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-                YQSDK.login(this);
+                YQSDK.login(new LoginListener() {
+                    @Override
+                    public void onSuccess(UserBean user) {
+
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+                });
                 break;
             case R.id.btn_login_out:
-                YQSDK.logout(this);
+                YQSDK.logout(new LogoutListener() {
+                    @Override
+                    public void onLogout() {
+
+                    }
+                });
                 break;
             case R.id.btn_pay:
                 SdkPayOrder order = new SdkPayOrder();
@@ -100,7 +116,22 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 order.remark =  "remark";
                 order.serverId = "serverId";
                 order.roleId = "roleId";
-                YQSDK.pay(this, order);
+                YQSDK.pay(order, new PayListener() {
+                    @Override
+                    public void onPaySuccess() {
+
+                    }
+
+                    @Override
+                    public void onPayFailure() {
+
+                    }
+
+                    @Override
+                    public void onPayCancel() {
+
+                    }
+                });
                 break;
             case R.id.btn_quit:
                 YQSDK.exitGame(this);
@@ -108,7 +139,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.btn_report:
                 SdkGameInfo gameInfo = new SdkGameInfo();
                 // TODO: 2017/7/30
-                YQSDK.reportGameInfo(this, gameInfo);
+                YQSDK.reportGameInfo(gameInfo);
                 break;
         }
     }

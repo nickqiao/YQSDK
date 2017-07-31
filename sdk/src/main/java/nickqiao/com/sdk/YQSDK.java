@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import nickqiao.com.sdk.listener.IResultListener;
+import nickqiao.com.sdk.listener.LoginListener;
+import nickqiao.com.sdk.listener.LogoutListener;
+import nickqiao.com.sdk.listener.PayListener;
+import nickqiao.com.sdk.listener.SplashListener;
 import nickqiao.com.sdk.model.SdkGameInfo;
 import nickqiao.com.sdk.model.SdkInitInfo;
 import nickqiao.com.sdk.model.SdkPayOrder;
@@ -12,31 +15,30 @@ import nickqiao.com.sdk.model.SdkPayOrder;
 /**
  * Created by chenyuqiao on 2017/7/30 .
  */
-
 public class YQSDK {
 
-    public static void init(Activity activity, SdkInitInfo info, IResultListener resultListener) {
-        ProxySdk.createIntance().init(activity, info, resultListener);
+    public static void init(Activity activity, SdkInitInfo info, SplashListener splashListener) {
+        ProxySdk.createIntance().init(activity, info, splashListener);
     }
 
-    public static void login(Activity activity) {
-        ProxySdk.createIntance().login(activity);
+    public static void login(LoginListener loginListener) {
+        ProxySdk.createIntance().login(loginListener);
     }
 
-    public static void pay(Activity activity, SdkPayOrder payOrder) {
-        ProxySdk.createIntance().pay(activity, payOrder);
+    public static void pay(SdkPayOrder payOrder, PayListener payListener) {
+        ProxySdk.createIntance().pay(payOrder, payListener);
     }
 
     public static void exitGame(Activity activity) {
         ProxySdk.createIntance().exitGame(activity);
     }
 
-    public static void logout(Activity activity) {
-        ProxySdk.createIntance().logout(activity);
+    public static void logout(LogoutListener logoutListener) {
+        ProxySdk.createIntance().logout(logoutListener);
     }
 
-    public static void reportGameInfo(Activity activity, SdkGameInfo gameInfo) {
-        ProxySdk.createIntance().reportGameInfo(activity, gameInfo);
+    public static void reportGameInfo( SdkGameInfo gameInfo) {
+        ProxySdk.createIntance().reportGameInfo(gameInfo);
     }
 
     /**

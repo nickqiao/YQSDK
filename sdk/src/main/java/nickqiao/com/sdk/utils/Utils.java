@@ -3,7 +3,6 @@ package nickqiao.com.sdk.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -12,8 +11,6 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -69,18 +66,6 @@ public class Utils {
             sb.append(ALL_CHAR.charAt(random.nextInt(length)));
         }
         return sb.toString();
-    }
-
-    /**
-     * 获取屏幕大小
-     */
-    public static Point getScreenSize(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics dm = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(dm);
-        int screenWidth = dm.widthPixels;
-        int screenHeigh = dm.heightPixels;
-        return new Point(screenWidth, screenHeigh);
     }
 
     /**
