@@ -11,11 +11,6 @@ import java.util.Map;
 import nickqiao.com.sdk.Consts;
 import nickqiao.com.sdk.utils.StringUtils;
 
-/**
- * Desction:
- * Author:pengjianbo
- * Date:15/10/22 下午2:52
- */
 public class HttpTask extends AsyncTask<Void, Void, String> {
 
     private String url;

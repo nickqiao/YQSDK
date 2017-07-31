@@ -7,11 +7,6 @@ import java.util.Map;
 
 import nickqiao.com.sdk.utils.Utils;
 
-/**
- * Desction:
- * Author:pengjianbo
- * Date:15/10/22 下午2:45
- */
 public class HttpUtils {
 
     public static void post(String url, Map<String, String> params, HttpListener listener) {

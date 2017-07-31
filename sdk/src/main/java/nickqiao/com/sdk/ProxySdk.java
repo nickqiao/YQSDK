@@ -3,10 +3,10 @@ package nickqiao.com.sdk;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
-import java.lang.ref.WeakReference;
-
-import nickqiao.com.sdk.model.IResultListener;
+import nickqiao.com.sdk.listener.IResultListener;
+import nickqiao.com.sdk.listener.SplashListener;
 import nickqiao.com.sdk.model.SdkGameInfo;
 import nickqiao.com.sdk.model.SdkInitInfo;
 import nickqiao.com.sdk.model.SdkPayOrder;
@@ -17,10 +17,12 @@ import nickqiao.com.sdk.model.SdkPayOrder;
 
 public class ProxySdk {
 
-    private static Object TAG = ProxySdk.class;
+    private static String TAG = ProxySdk.class.getSimpleName();
     private static ProxySdk intance;
-    private WeakReference<Activity> mContext;
-
+    private Activity mContext;
+    private static SplashListener mSplashListener;
+    private SdkInitInfo mSdkInitInfo;
+    private IResultListener mResultListener;
     private ProxySdk() {
 
     }
@@ -33,11 +35,19 @@ public class ProxySdk {
     }
 
     public Context getContext() {
-        return mContext.get();
+        return mContext;
     }
 
     private void initApplication(Context context) {
 
+    }
+
+    public void beforeAppAttach(Context context) {
+        Log.d(TAG, "beforeAppAttach");
+    }
+
+    public void afterAppOnCreate(Context context) {
+        Log.d(TAG, "afterAppOnCreate");
     }
 
     private void onCreate(Context context) {
@@ -45,15 +55,16 @@ public class ProxySdk {
     }
 
     public void onPause(Activity activity) {
-
+        Log.d(TAG, "onPause");
     }
 
     public void onResume(Activity activity) {
+        Log.d(TAG, "onResume");
 
     }
 
     public void onStop(Activity activity) {
-
+        Log.d(TAG, "onStop");
     }
 
     public void onNewIntent(Activity activity, Intent intent) {
@@ -61,11 +72,11 @@ public class ProxySdk {
     }
 
     public void onDestroy(Activity activity) {
-
+        Log.d(TAG, "onDestroy");
     }
 
     public void onRestart(Activity activity) {
-
+        Log.d(TAG, "onRestart");
     }
 
     public void onActivityResult(Activity activity,int requestCode, int resultCode, Intent data) {
@@ -76,40 +87,35 @@ public class ProxySdk {
 
     }
 
-    public void beforeAppAttach(Context context) {
-
-    }
-
-    public void afterAppOnCreate(Context context) {
-
-    }
-
     public void changeOrientation(Activity activity, int orientation) {
 
     }
 
-    public void init(final Activity activity, final SdkInitInfo info, IResultListener mResultListener) {
-
+    public void init(final Activity activity, final SdkInitInfo sdkInitInfo, IResultListener resultListener) {
+        Log.d(TAG, "init");
+        mContext = activity;
+        mSdkInitInfo = sdkInitInfo;
+        mResultListener = resultListener;
     }
 
     public void login(Activity activity) {
-
+        Log.d(TAG, "login");
     }
 
     public void pay(Activity activity, SdkPayOrder payOrder) {
-
+        Log.d(TAG, "pay");
     }
 
     public void exitGame(Activity activity) {
-
+        Log.d(TAG, "exitGame");
     }
 
     public void logout(Activity activity) {
-
+        Log.d(TAG, "logout");
     }
 
     public void reportGameInfo(Activity activity, SdkGameInfo gameInfo) {
-
+        Log.d(TAG, "reportGameInfo");
     }
 
 }

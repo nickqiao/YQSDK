@@ -4,11 +4,6 @@ import android.os.AsyncTask;
 
 import java.io.File;
 
-/**
- * Desction:
- * Author:pengjianbo
- * Date:15/10/22 下午3:37
- */
 public class DownloadTask extends AsyncTask<Void, Integer, File> {
 
     private String url;

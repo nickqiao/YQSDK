@@ -9,7 +9,7 @@ import android.view.View;
 import java.util.UUID;
 
 import nickqiao.com.sdk.YQSDK;
-import nickqiao.com.sdk.model.IResultListener;
+import nickqiao.com.sdk.listener.IResultListener;
 import nickqiao.com.sdk.model.SdkGameInfo;
 import nickqiao.com.sdk.model.SdkInitInfo;
 import nickqiao.com.sdk.model.SdkPayOrder;
@@ -35,6 +35,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         initInfo.appKey = "";
         initInfo.debug = true;
         initInfo.oritentation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        initInfo.showSplash = false;
         YQSDK.init(this, initInfo, new IResultListener() {
             @Override
             public void onResult(SdkResult result) {

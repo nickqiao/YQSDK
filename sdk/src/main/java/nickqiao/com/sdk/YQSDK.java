@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import nickqiao.com.sdk.model.IResultListener;
+import nickqiao.com.sdk.listener.IResultListener;
 import nickqiao.com.sdk.model.SdkGameInfo;
 import nickqiao.com.sdk.model.SdkInitInfo;
 import nickqiao.com.sdk.model.SdkPayOrder;

@@ -2,11 +2,6 @@ package nickqiao.com.sdk.http;
 
 import org.json.JSONObject;
 
-/**
- * Desction:
- * Author:pengjianbo
- * Date:15/10/22 下午3:04
- */
 public class HttpListener {
 
     public void onStart() {
